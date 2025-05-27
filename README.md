@@ -10,7 +10,7 @@ El proyecto fue desarrollado siguiendo los principios de la **Clean Architecture
 
 |                                                    Demo gifs                                                     |                                              Demo gifs                                               |                                              Demo gifs                                               |
 |:----------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------:|
-| <img src="https://raw.githubusercontent.com/RendevMq/CinecodeApp/refs/heads/master/gifs/gif1.gif" width="250px"> | <img src="https://github.com/RendevMq/CinecodeApp/blob/master/gifs/gif2.gif?raw=true" width="250px"> | <img src="https://github.com/RendevMq/CinecodeApp/blob/master/gifs/gif3.gif?raw=true" width="250px"> |
+| <img src="https://raw.githubusercontent.com/RendevMq/CinecodeApp/refs/heads/master/gifs/gif1.gif" width="230px"> | <img src="https://github.com/RendevMq/CinecodeApp/blob/master/gifs/gif2.gif?raw=true" width="230px"> | <img src="https://github.com/RendevMq/CinecodeApp/blob/master/gifs/gif3.gif?raw=true" width="230px"> |
 ---
 
 
