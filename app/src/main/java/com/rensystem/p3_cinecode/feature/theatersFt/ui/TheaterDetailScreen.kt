@@ -57,6 +57,7 @@ import com.rensystem.p3_cinecode.core.utils.getFullDayOfWeekEs
 import com.rensystem.p3_cinecode.feature.homeFt.ui.components.DinamicGradientOverlay
 import com.rensystem.p3_cinecode.feature.moviesFt.ui.components.MovieLabelTag
 import com.rensystem.p3_cinecode.feature.theatersFt.domain.model.MovieTheaterItem
+import com.rensystem.p3_cinecode.feature.theatersFt.domain.model.SessionTheaterItem
 import com.rensystem.p3_cinecode.feature.theatersFt.domain.model.TheaterItem
 import com.rensystem.p3_cinecode.feature.theatersFt.domain.model.getFormatLabels
 import com.rensystem.p3_cinecode.feature.theatersFt.domain.model.getLabel
@@ -156,7 +157,7 @@ fun TheaterDetailScreen(
                                 tint = customColors.textFixed,
                             )
                             Text(
-                                text = "Theaters",
+                                text = "Cines",
                                 modifier = Modifier.padding(start = 12.dp),
                                 color = customColors.textFixed,
                                 style = MaterialTheme.typography.titleLarge
@@ -466,53 +467,52 @@ fun MovieCard(movie: MovieTheaterItem) {
             Spacer(modifier = Modifier.height(12.dp))
             Text(text = "Showtimes:", style = MaterialTheme.typography.labelMedium)
             movie.showTime?.takeIf { it.isNotEmpty() }?.let { showTimes ->
-                LazyVerticalGrid (
-                    columns = GridCells.Adaptive(minSize = 60.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(max = 300.dp) // Ajustable según tu layout
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    userScrollEnabled = false
-                ) {
-                    items(showTimes) { session ->
-                        val time = try {
-                            OffsetDateTime.parse(session.showtime)
-                                .format(DateTimeFormatter.ofPattern("HH:mm"))
-                        } catch (e: Exception) {
-                            "??:??"
+                if (showTimes.size <= 6) {
+                    // Mostrar en grid adaptable sin scroll
+                    LazyVerticalGrid(
+                        columns = GridCells.Adaptive(minSize = 60.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(max = 300.dp)
+                            .padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        userScrollEnabled = false
+                    ) {
+                        items(showTimes) { session ->
+                            ShowTimeBox(session)
                         }
+                    }
+                } else {
+                    // Mostrar con scroll horizontal con columnas fijas
+                    val columnsCount = (showTimes.size + 1) / 2
 
-                        Box(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(Color.LightGray)
-                                .padding(vertical = 12.dp, horizontal = 16.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = time,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = Color.Black
-                            )
+                    // Agrupar en columnas con 2 elementos máximo
+                    val columns = remember(showTimes) {
+                        showTimes.chunked(2)
+                    }
+
+                    LazyRow(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(max = 300.dp)
+                            .padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        contentPadding = PaddingValues(horizontal = 8.dp)
+                    ) {
+                        items(columns.take(columnsCount)) { columnItems ->
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(8.dp),
+                                modifier = Modifier.wrapContentWidth()
+                            ) {
+                                columnItems.forEach { session ->
+                                    ShowTimeBox(session)
+                                }
+                            }
                         }
                     }
                 }
-//                Column(
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                    verticalArrangement = Arrangement.spacedBy(8.dp)
-//                ) {
-//                    showTimes.forEach { session ->
-//                        Text(
-//                            text = session.showtime,
-//                            style = MaterialTheme.typography.bodySmall,
-//                            modifier = Modifier
-//                                .padding(4.dp)
-//                                .clickable { /* Puedes manejar la selección aquí */ }
-//                        )
-//                    }
-//                }
+
             } ?: Text(
                 text = "No showtimes available",
                 color = Color.Gray,
@@ -521,6 +521,32 @@ fun MovieCard(movie: MovieTheaterItem) {
         }
     }
 }
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun ShowTimeBox(session: SessionTheaterItem) {
+    val time = try {
+        OffsetDateTime.parse(session.showtime)
+            .format(DateTimeFormatter.ofPattern("HH:mm"))
+    } catch (e: Exception) {
+        "??:??"
+    }
+
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(Color.LightGray)
+            .padding(vertical = 12.dp, horizontal = 16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = time,
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.Black
+        )
+    }
+}
+
 
 @Composable
 fun LoadingScreen() {

@@ -595,24 +595,6 @@ fun MovieDetailScreen(
                                         }
                                     )
                                 }
-
-//                                items(10) { index ->
-//                                    Card(
-//                                        modifier = Modifier
-//                                            .clickable {
-//                                                Log.i("CkickCARAD", "AAAAAAA-${index}")
-//                                            }
-//                                            .padding(16.dp)
-//                                            .fillMaxWidth()
-//
-//                                    ) {
-//                                        Text(
-//                                            "item $index",
-//                                            modifier = Modifier.padding(16.dp),
-//                                            color = Color.White
-//                                        )
-//                                    }
-//                                }
                             }
                         }
                     }

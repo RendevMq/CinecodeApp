@@ -154,7 +154,7 @@ fun TheatersMainScreen(
                         ) {
                             Text(
                                 modifier = Modifier.weight(1f),
-                                text = "Theaters",
+                                text = "Cines",
                                 color = customColors.textFixed,
                                 style = MaterialTheme.typography.titleLarge
                             )
@@ -172,7 +172,7 @@ fun TheatersMainScreen(
 
                     item {
                         Text(
-                            "My Favorites",
+                            "Mis Favoritos",
                             style = MaterialTheme.typography.titleMedium,
                             color = customColors.textFixed,
                             modifier = Modifier
@@ -188,7 +188,7 @@ fun TheatersMainScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = "No favorites found",
+                                    text = "No se encontraron favoritos",
                                     textAlign = TextAlign.Center,
                                     color = customColors.textSecondary
                                 )
@@ -244,7 +244,7 @@ fun TheatersMainScreen(
 
                     stickyHeader {
                         Text(
-                            "CineCode Theaters",
+                            "Cines en CineCode",
                             style = MaterialTheme.typography.titleMedium,
                             color = customColors.textFixed,
                             modifier = Modifier

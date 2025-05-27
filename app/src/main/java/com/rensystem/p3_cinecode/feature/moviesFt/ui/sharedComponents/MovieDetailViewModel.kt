@@ -1,6 +1,5 @@
 package com.rensystem.p3_cinecode.feature.moviesFt.ui.sharedComponents
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rensystem.p3_cinecode.feature.moviesFt.domain.model.Actor
@@ -34,7 +33,7 @@ class MovieDetailViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<MovieDetailUIPagerState>(MovieDetailUIPagerState.Loading)
     val uiState: StateFlow<MovieDetailUIPagerState> = _uiState
 
-    private val _dateSelected = MutableStateFlow<String>("2025-05-07")
+    private val _dateSelected = MutableStateFlow<String>("2025-05-27")
     val dateSelected: StateFlow<String> = _dateSelected
 
     private var cachedAllSessions: List<SessionMovieItem> = emptyList()
@@ -80,18 +79,6 @@ class MovieDetailViewModel @Inject constructor(
                         cast = fakeCastList()
                     )
                 }
-
-//                val movieFull = movieWithCinemas!!.copy(
-//                    cast = fakeCastList()
-//                )
-
-//                if (!isDataLoaded) {
-//                    allSessions = getAllSessions()
-//                    allMovies = getAllMovies()
-//                    allTheaters = getAllTheaters()
-//                    isDataLoaded = true
-//                }
-
                 // Lógica de dominio: usamos el caso de uso
                 val theatersWithSessions = getTheatersWithSessionsUseCase(
                     movie = movieFull,
@@ -174,11 +161,4 @@ class MovieDetailViewModel @Inject constructor(
             ),
         )
     }
-
-    //METODO CAMBIAR NOMBRE(ESTE ES EL VERDADERO CON LAS LALAMDAS A ALA PI, DE MODMENTO DEJARE CON EL DE ARRIBA):
-//    fun initWithMovieItem(movieItem: MovieItem) {
-//        _uiState.value = MovieDetailUIPagerState.Success(movieItem)
-//            //AQUI LUEGO IRIA LA FUNCION PARA GUARDAR EL  val theatersWithSessions: List<TheaterMovieItem>, DE UISTATE
-//    }
-
 }

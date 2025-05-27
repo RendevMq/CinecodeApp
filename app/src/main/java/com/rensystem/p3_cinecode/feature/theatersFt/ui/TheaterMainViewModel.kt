@@ -42,7 +42,7 @@ class TheaterMainViewModel @Inject constructor(
     private val _theaterDetailUiState = MutableStateFlow<TheaterDetailUIState>(TheaterDetailUIState.Loading)
     val theaterDetailUiState: StateFlow<TheaterDetailUIState> = _theaterDetailUiState
 
-    private val _dateSelected = MutableStateFlow<String>("2025-05-06")
+    private val _dateSelected = MutableStateFlow<String>("2025-05-27")
     val dateSelected: StateFlow<String> = _dateSelected
 
 

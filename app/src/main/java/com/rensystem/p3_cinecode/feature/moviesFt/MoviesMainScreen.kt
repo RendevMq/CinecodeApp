@@ -82,8 +82,8 @@ import com.rensystem.p3_cinecode.feature.moviesFt.domain.model.MovieItem
 enum class MoviesTabs(
     val text: String
 ) {
-    NowShowing("Now Showing"),
-    ComingSoon("Coming Soon"),
+    NowShowing("Estrenos"),
+    ComingSoon("Próximamente"),
 }
 
 @Composable
@@ -186,7 +186,7 @@ fun MoviesMainScreen(
                         ) {
                             Text(
                                 modifier = Modifier.weight(1f),
-                                text = "Movies",
+                                text = "Películas",
                                 color = customColors.textFixed,
                                 style = MaterialTheme.typography.titleLarge
                             )
@@ -211,40 +211,6 @@ fun MoviesMainScreen(
                         )
                     }
                 }
-
-                // 🔼 TopBar que se oculta al hacer scroll
-//                item(span = { GridItemSpan(2) }) {
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .background(customColors.bottomBarBackgroundColor)
-//                            .padding(16.dp),
-//                        verticalAlignment = Alignment.CenterVertically,
-//                    ) {
-//                        Text(
-//                            modifier = Modifier.weight(1f),
-//                            text = "Movies",
-//                            color = customColors.textFixed,
-//                            style = MaterialTheme.typography.titleLarge
-//                        )
-//                        Icon(
-//                            modifier = Modifier
-//                                .border(2.dp, customColors.textFixed, CircleShape)
-//                                .padding(8.dp)
-//                                .size(20.dp),
-//                            imageVector = Icons.Default.Person,
-//                            contentDescription = "Profile",
-//                            tint = customColors.textFixed,
-//                        )
-//                    }
-//                    // Línea separadora
-//                    Box(
-//                        Modifier
-//                            .fillMaxWidth()
-//                            .height(1.dp)
-//                            .background(customColors.textFixed.copy(alpha = 0.3f)) // efecto sutil
-//                    )
-//                }
 
                 // 🧷 Sección Sticky que se mide
 
@@ -379,10 +345,7 @@ fun MoviesMainScreen(
                                 }
                             }
                         }
-
-
                     }
-
                 }
             }
 
@@ -414,10 +377,7 @@ fun StickySectionContentt(
     selectedTabIndex: Int,
     onTabSelected: (Int) -> Unit
 ) {
-
-
     val customColors = LocalBrandColors.current
-
     Column(
         Modifier
             .background(MaterialTheme.colorScheme.background)
@@ -450,89 +410,5 @@ fun StickySectionContentt(
             filters = MovieMainFilters.entries.toList(),
             onClick = { selected -> println(selected.text) }
         )
-
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .background(Color(0xFF141623)),
-//            verticalAlignment = Alignment.CenterVertically
-//        ) {
-//            Filters.entries.forEachIndexed { index, filter ->
-//                Column(
-//                    modifier = Modifier
-//                        .weight(1f)
-//                        .padding(vertical = 8.dp),
-//                    verticalArrangement = Arrangement.Center,
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                ) {
-//                    Icon(
-//                        modifier = Modifier
-//                            .size(30.dp)
-//                            .clickable { /* TODO */ },
-//                        imageVector = filter.icon,
-//                        contentDescription = filter.text,
-//                        tint = customColors.textFixed,
-//                    )
-//                    Spacer(modifier = Modifier.height(4.dp))
-//                    Text(
-//                        text = filter.text,
-//                        color = customColors.textFixed,
-//                        style = MaterialTheme.typography.labelSmall
-//                    )
-//                }
-//                // Añadir el divisor solo si no es el último
-//                if (index != Filters.entries.lastIndex) {
-//                    Box(
-//                        modifier = Modifier
-//                            .heightIn(70.dp)
-//                            .width(1.dp)
-//                            .background(customColors.textFixed.copy(alpha = 0.5f)) // Color y transparencia del divisor
-//                    )
-//                }
-//            }
-//        }
-
     }
 }
-
-// ✅ Grilla de películas
-//item {
-//    HorizontalPager(
-//        state = pagerState,
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .wrapContentHeight() // ← importante: dejar que crezca
-//    ) { page ->
-//        val items = (0 until 30).toList().chunked(2)
-//
-//        Column(modifier = Modifier.fillMaxWidth()) {
-//            items.forEach { rowItems ->
-//                Row(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-//                ) {
-//                    rowItems.forEach { index ->
-//                        Card(
-//                            modifier = Modifier
-//                                .weight(1f)
-//                                .aspectRatio(0.75f)
-//                                .padding(8.dp),
-//                            elevation = CardDefaults.cardElevation(4.dp)
-//                        ) {
-//                            Text(
-//                                text = "Item $index",
-//                                modifier = Modifier.padding(16.dp)
-//                            )
-//                        }
-//                    }
-//
-//                    // Si hay un solo item en la fila (impar), agregamos un espacio vacío
-//                    if (rowItems.size == 1) {
-//                        Spacer(modifier = Modifier.weight(1f))
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
-//}
